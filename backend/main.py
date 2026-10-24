@@ -1,13 +1,21 @@
-from fastapi import FastAPI
+from typing import Annotated
+
+from fastapi import Depends, FastAPI
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from database import get_db
 
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/api/health/db")
+async def health_check_db(db: Annotated[AsyncSession, Depends(get_db)]):
+    result=await db.execute(text("SELECT 1"))
+    value= result.scalar()
+    return {"status": "ok","value": value}
