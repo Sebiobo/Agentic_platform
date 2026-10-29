@@ -1,10 +1,9 @@
 from typing import Annotated
 
+from backend.db.session import get_db
 from fastapi import Depends, FastAPI
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from database import get_db
 
 app = FastAPI()
 
@@ -16,6 +15,6 @@ async def health_check():
 
 @app.get("/api/health/db")
 async def health_check_db(db: Annotated[AsyncSession, Depends(get_db)]):
-    result=await db.execute(text("SELECT 1"))
-    value= result.scalar()
-    return {"status": "ok","value": value}
+    result = await db.execute(text("SELECT 1"))
+    value = result.scalar()
+    return {"status": "ok", "value": value}
