@@ -1,0 +1,121 @@
+
+.chat-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+.welcome-section {
+  width: 100%;
+  max-width: var(--content-width);
+  text-align: center;
+}
+
+.welcome-section h1 {
+  margin: 0 0 14px;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 600;
+  letter-spacing: -1.8px;
+}
+
+.welcome-section > p {
+  margin: 0 0 34px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.chat-box {
+  padding: 18px;
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast);
+}
+
+.chat-box:focus-within {
+  border-color: #626575;
+}
+
+.chat-box textarea {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+  outline: none;
+  line-height: 1.6;
+}
+
+.chat-box textarea::placeholder {
+  color: #777985;
+}
+
+.chat-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.attach-button,
+.send-button {
+  border: 0;
+  border-radius: var(--radius-md);
+}
+
+.attach-button {
+  padding: 10px 12px;
+  color: #b6b7c0;
+  background: transparent;
+}
+
+.send-button {
+  width: 42px;
+  height: 42px;
+  color: #171719;
+  background: var(--color-accent);
+  font-size: 24px;
+  transition: transform var(--transition-fast);
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+}
+
+.suggestions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.suggestions button {
+  padding: 10px 14px;
+  color: #bfc0c8;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  transition: background var(--transition-fast);
+}
+
+.suggestions button:hover {
+  background: #25262d;
+}
+
+@media (max-width: 480px) {
+  .chat-page {
+    padding: 24px 16px;
+  }
+
+  .welcome-section h1 {
+    letter-spacing: -1.2px;
+  }
+}

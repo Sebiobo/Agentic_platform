@@ -1,0 +1,18 @@
+
+:root {
+  font-family: Inter, sans-serif;
+
+  --color-background: #101114;
+  --color-surface: #191a1f;
+  --color-border: #303139;
+  --color-text: #f5f5f5;
+  --color-text-muted: #999ba5;
+  --color-accent: #f4f4f5;
+
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-full: 999px;
+
+  --transition-fast: 180ms ease;
+  --content-width: 720px;
+}
