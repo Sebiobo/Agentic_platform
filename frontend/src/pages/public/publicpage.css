@@ -119,3 +119,36 @@
     letter-spacing: -1.2px;
   }
 }
+
+
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-content {
+  min-width: 0;
+  transition: margin-left 250ms ease;
+}
+
+.sidebar-visible .app-content {
+  margin-left: 260px;
+}
+
+.chat-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+@media (max-width: 768px) {
+  .sidebar-visible .app-content {
+    margin-left: 0;
+  }
+
+  .sidebar {
+    box-shadow: 20px 0 60px rgba(0, 0, 0, 0.2);
+  }
+}
+
