@@ -1,0 +1,9 @@
+.forgot {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.forgot:hover {
+  color: var(--text);
+}

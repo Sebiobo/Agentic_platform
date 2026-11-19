@@ -1,24 +1,14 @@
+import { Route, Routes } from "react-router-dom";
+import PublicPage from "./pages/public/PublicPage";
+import SignInPage from "./pages/signin/SignInPage";
+import SignUpPage from "./pages/signup/SignUpPage";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-
-import SignInPage from "./pages/signin/signinpage";
-import SignUpPage from "./pages/signup/signuppage";
-import ChatPage from "./pages/public/publicpage";
-
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/public" replace />} />
-
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/public" element={<ChatPage />} />
-
-        <Route path="*" element={<Navigate to="/public" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<PublicPage />} />
+      <Route path="/signin" element={<SignInPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+    </Routes>
   );
 }
-
-export default App;

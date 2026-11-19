@@ -1,32 +1,42 @@
-# React + TypeScript + Vite
+# BuildAI frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + TypeScript + Vite single-page app for the multi-agent application generator.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Command             | What it does                          |
+| ------------------- | ------------------------------------- |
+| `npm run dev`       | Dev server on http://localhost:5173   |
+| `npm run build`     | Type-check and production build       |
+| `npm run lint`      | Oxlint                                |
+| `npm run typecheck` | TypeScript only                       |
+| `npm run check`     | Type-check and lint                   |
 
-## React Compiler
+The dev server proxies `/api` to `http://localhost:8000` (see `vite.config.ts`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Structure
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+src/
+  styles/        global design tokens, reset and base styles
+  lib/           shared infrastructure (API client, token storage)
+  components/
+    ui/          generic building blocks (Button, ButtonLink, icons)
+    layout/      app shell pieces (Sidebar)
+  features/
+    auth/        session, API calls, protected routes, auth forms
+    chat/        prompt box (conversations will live here)
+  pages/         route-level components that compose features
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Dependencies point one way: `pages` -> `features` -> `components` and `lib`.
+`lib` and `components` never import from `features`.
+
+## Styling
+
+- Global styles live only in `src/styles`. Every value (color, spacing, motion) is a CSS variable from `tokens.css`.
+- Every component and page has its own `*.module.css`. Class names are scoped automatically, so pages cannot affect each other.
+
+## Known limitations
+
+- The access token is kept in `localStorage`, which is readable by any script running on the page (XSS). A refresh-token flow with an `HttpOnly` cookie is planned.
